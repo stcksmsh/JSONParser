@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.print.DocFlavor.STRING;
+
+import JSON.JSONException;
+
 public class JSONObject {
 
     private List<String> keys;
@@ -17,6 +21,26 @@ public class JSONObject {
         values = null;
         type = 'N'; /// NULL object
         value = null;
+    }
+
+    public JSONObject(int i) {
+        this();
+        setValue(i);
+    }
+
+    public JSONObject(double d) {
+        this();
+        setValue(d);
+    }
+
+    public JSONObject(String s) {
+        this();
+        setValue(s);
+    }
+
+    public JSONObject(boolean b) {
+        this();
+        setValue(b);
     }
 
     public void setValue(int i) {
@@ -41,6 +65,7 @@ public class JSONObject {
 
     public static JSONObject parseString(String string) {
         JSONObject obj = new JSONObject();
+
         return obj;
     }
 
@@ -82,7 +107,7 @@ public class JSONObject {
                     sb.deleteCharAt(sb.length() - 1);
                 sb.append(']');
                 break;
-            case 'O': /// object
+            case 'M': /// map
                 sb.append('{');
                 for (int i = 0; i < keys.size(); i++) {
                     sb.append(keys.get(i));
@@ -101,10 +126,10 @@ public class JSONObject {
         return sb.toString();
     }
 
-    public void add(JSONObject value) throws JSONException {
-        if (type != 'A' && type != 'N') { /// it is not an array or NULL
+    public void add(JSONObject value) {
+        if (type != 'A' && type != 'N') /// it is not an array or NULL
             throw new JSONException("Error: JSONObject is not of type array");
-        }
+
         if (type == 'N') {
             type = 'A';
             values = new ArrayList<JSONObject>();
@@ -112,49 +137,67 @@ public class JSONObject {
         values.add(value);
     }
 
-    public void add(int i) throws JSONException {
+    public void add(int i) {
         JSONObject obj = new JSONObject();
         obj.setValue(i);
         add(obj);
     }
 
-    public void add(double d) throws JSONException {
+    public void add(double d) {
         JSONObject obj = new JSONObject();
         obj.setValue(d);
         add(obj);
     }
 
-    public void add(String s) throws JSONException {
+    public void add(String s) {
         JSONObject obj = new JSONObject();
         obj.setValue(s);
         add(obj);
     }
 
-    public void add(boolean b) throws JSONException {
+    public void add(boolean b) {
         JSONObject obj = new JSONObject();
         obj.setValue(b);
         add(obj);
     }
 
     public void add(String key, JSONObject value) {
+        if (type != 'M' && type != 'N')
+            throw new JSONException("Error: JSONObject is not of type map...");
 
+        if (type == 'N') {
+            keys = new ArrayList<String>();
+            values = new ArrayList<JSONObject>();
+            type = 'M';
+        }
+        keys.add(key);
+        values.add(value);
+    }
+
+    public JSONObject get(String key) {
+        if (type != 'M')
+            throw new JSONException("Error: JSONObject is not of type map...");
+        int index = keys.indexOf(key);
+        if (index == -1)
+            return null;
+        return values.get(index);
+    }
+
+    public JSONObject get(int index) {
+        if (type != 'A')
+            throw new JSONException("Error: JSONObject is not of type map...");
+        return values.get(index);
     }
 
     public static void main(String[] args) {
         JSONObject obj = new JSONObject();
-        obj.type = 'J';
 
-        obj.keys.add("Test");
-        JSONObject value = new JSONObject();
-        value.type = 'S';
-        value.value = "TESTING";
-        obj.values.add(value);
+        obj.add(new JSONObject("test"));
+        obj.add(new JSONObject(false));
 
-        obj.keys.add("Again");
-        value = new JSONObject();
-        value.type = 'D';
-        value.value = Double.valueOf(10.123);
-        obj.values.add(value);
         System.out.println(obj.toString());
+        System.out.println(obj.get(0));
+        System.out.println(obj.get(1));
+        System.out.println(obj.get("test"));
     }
 }

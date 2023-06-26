@@ -1,6 +1,6 @@
 package JSON;
 
-public class JSONException extends Exception {
+public class JSONException extends RuntimeException {
     public JSONException(String errorMSG) {
         super(errorMSG);
     }

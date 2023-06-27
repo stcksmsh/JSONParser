@@ -1,4 +1,4 @@
-package JSON;
+package JSOpeN;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -350,8 +350,9 @@ public class JSONObject {
             case 'M': /// map
                 sb.append('{');
                 for (int i = 0; i < keys.size(); i++) {
+                    sb.append('"');
                     sb.append(keys.get(i));
-                    sb.append(':');
+                    sb.append("\":");
                     sb.append(values.get(i).toString());
                     sb.append(',');
                 }
@@ -381,27 +382,19 @@ public class JSONObject {
     }
 
     public void add(int i) {
-        JSONObject obj = new JSONObject();
-        obj.setValue(i);
-        add(obj);
+        add(new JSONObject(i));
     }
 
     public void add(double d) {
-        JSONObject obj = new JSONObject();
-        obj.setValue(d);
-        add(obj);
+        add(new JSONObject(d));
     }
 
     public void add(String s) {
-        JSONObject obj = new JSONObject();
-        obj.setValue(s);
-        add(obj);
+        add(new JSONObject(s));
     }
 
     public void add(boolean b) {
-        JSONObject obj = new JSONObject();
-        obj.setValue(b);
-        add(obj);
+        add(new JSONObject(b));
     }
 
     public void add(String key, JSONObject value) {
@@ -416,6 +409,28 @@ public class JSONObject {
             values = new ArrayList<JSONObject>();
         keys.add(key);
         values.add(value);
+    }
+
+    public void add(String key, int i) {
+        add(key, new JSONObject(i));
+    }
+
+    public void add(String key, double d) {
+        add(key, new JSONObject(d));
+    }
+
+    public void add(String key, String s) {
+        add(key, new JSONObject(s));
+    }
+
+    public void add(String key, boolean b) {
+        add(key, new JSONObject(b));
+    }
+
+    public void addNull(String key) {
+        JSONObject obj = new JSONObject();
+        obj.setNull();
+        add(key, obj);
     }
 
     public JSONObject get(String key) {

@@ -46,7 +46,7 @@ public class JSONObject {
         type = 'I';
     }
 
-    public void setNull(){
+    public void setNull() {
         value = null;
         type = 'N';
     }
@@ -70,8 +70,8 @@ public class JSONObject {
         return type;
     }
 
-    public boolean isEmpty(){
-        if(type == 'A' || type == 'M')
+    public boolean isEmpty() {
+        if (type == 'A' || type == 'M')
             return values.isEmpty();
         return true;
     }
@@ -89,7 +89,7 @@ public class JSONObject {
             type = currentContainer.getType();
             /// skip all whitespace
             while ((currentChar == ' ' || currentChar == '\t' || currentChar == '\n') && index < string.length())
-            currentChar = string.charAt(++index);
+                currentChar = string.charAt(++index);
             if (type == 'U') {
                 if (currentChar == '[') { /// array
                     type = 'A';
@@ -97,55 +97,57 @@ public class JSONObject {
                 } else if (currentChar == '{') { /// map
                     type = 'M';
                     currentContainer.type = 'M';
-                } else if (( currentChar >= '0' && currentChar <= '9' ) || currentChar == '-') { /// integer or double                    
+                } else if ((currentChar >= '0' && currentChar <= '9') || currentChar == '-') { /// integer or double
                     int number = 0;
                     int decimals = -1;
-                    if(currentChar == '-'){
-                        if(index == string.length() - 1){
+                    if (currentChar == '-') {
+                        if (index == string.length() - 1) {
                             throw new JSONException(index, string);
                         }
                         number = -(string.charAt(++index) - '0');
-                    }else{
+                    } else {
                         number = currentChar - '0';
                     }
-                    while(index < string.length() - 1){
+                    while (index < string.length() - 1) {
                         currentChar = string.charAt(++index);
-                        if(currentChar >= '0' && currentChar <='9'){
+                        if (currentChar >= '0' && currentChar <= '9') {
                             int dig = currentChar - '0';
-                            if(number < 0)dig = -dig;
-                            number = number*10 + dig;
-                        }else
+                            if (number < 0)
+                                dig = -dig;
+                            number = number * 10 + dig;
+                        } else
                             break;
                     }
-                    if(currentChar == '.'){
+                    if (currentChar == '.') {
                         decimals = 0;
-                        while(index < string.length() - 1){
+                        while (index < string.length() - 1) {
                             currentChar = string.charAt(++index);
-                            if(currentChar >= '0' && currentChar <='9'){
-                                decimals = decimals*10 + currentChar - '0';
-                            }else{
+                            if (currentChar >= '0' && currentChar <= '9') {
+                                decimals = decimals * 10 + currentChar - '0';
+                            } else {
                                 break;
                             }
                         }
                     }
-                    if(decimals == -1){
+                    if (decimals == -1) {
                         currentContainer.setValue(number);
-                    }else{
+                    } else {
                         double d = number;
-                        if(d < 0){
-                            decimals = - decimals;
+                        if (d < 0) {
+                            decimals = -decimals;
                         }
-                        d += decimals * ( Math.pow(10, -(int)(Math.log10(decimals) + 1)));
+                        d += decimals * (Math.pow(10, -(int) (Math.log10(decimals) + 1)));
                         currentContainer.setValue(d);
                     }
                     index--;
                 } else if (currentChar == '"') { /// string
                     type = 'S';
                     int stringEnd = string.indexOf('\"', index + 1);
-                    if(stringEnd == -1){
-                        throw new JSONException("Error: String block started but never finished at " + Integer.toString(index));
+                    if (stringEnd == -1) {
+                        throw new JSONException(
+                                "Error: String block started but never finished at " + Integer.toString(index));
                     }
-                    currentContainer.setValue(string.substring(index+1, stringEnd));
+                    currentContainer.setValue(string.substring(index + 1, stringEnd));
                     index = stringEnd;
                 } else if (currentChar == 'f' || currentChar == 't') { /// boolean
                     type = 'B';
@@ -153,16 +155,16 @@ public class JSONObject {
                         throw new JSONException(index, string);
                     }
                     String value = string.substring(index, index + 4);
-                    if(value.equals("true")){
+                    if (value.equals("true")) {
                         currentContainer.setValue(true);
                         index += 4;
-                    }else if(value.equals("fals")){
+                    } else if (value.equals("fals")) {
                         index += 4;
-                        if(index >= string.length() || string.charAt(index) != 'e')
+                        if (index >= string.length() || string.charAt(index) != 'e')
                             throw new JSONException(index, string);
                         currentContainer.setValue(false);
-                        index++;                            
-                    }else{
+                        index++;
+                    } else {
                         throw new JSONException(index, string);
                     }
                 } else if (currentChar == 'n') { /// nulll
@@ -186,73 +188,81 @@ public class JSONObject {
             }
             type = currentContainer.getType();
             if (type == 'M') {
-                if(currentChar == '"'){ /// new entry
-                    int nameEnd = string.indexOf('\"', index+1);
-                    String name = string.substring(index+1, nameEnd);
+                if (currentChar == '"') { /// new entry
+                    int nameEnd = string.indexOf('\"', index + 1);
+                    String name = string.substring(index + 1, nameEnd);
                     JSONObject obj = new JSONObject();
                     currentContainer.add(name, obj);
                     containerStack.push(currentContainer);
                     containerStack.push(obj);
                     index = nameEnd + 1;
                     currentChar = string.charAt(index);
-                    while ((currentChar == ' ' || currentChar == '\t' || currentChar == '\n') && index < string.length())
+                    while ((currentChar == ' ' || currentChar == '\t' || currentChar == '\n')
+                            && index < string.length())
                         currentChar = string.charAt(++index);
-                    if(currentChar != ':')
-                        throw new JSONException("Error: expected ':' but found '" + currentChar + "' at " + Integer.toString(index) + " while parsing string:" + string);
+                    if (currentChar != ':')
+                        throw new JSONException("Error: expected ':' but found '" + currentChar + "' at "
+                                + Integer.toString(index) + " while parsing string:" + string);
                     currentChar = string.charAt(++index);
-                    while ((currentChar == ' ' || currentChar == '\t' || currentChar == '\n') && index < string.length())
+                    while ((currentChar == ' ' || currentChar == '\t' || currentChar == '\n')
+                            && index < string.length())
                         currentChar = string.charAt(++index);
-                }else if(currentChar == ','){ 
+                } else if (currentChar == ',') {
                     currentChar = string.charAt(++index);
-                    containerStack.push(currentContainer);                    
-                }else if(currentChar == '}'){ /// end of map
-                    if(!containerStack.empty()){
+                    containerStack.push(currentContainer);
+                } else if (currentChar == '}') { /// end of map
+                    if (!containerStack.empty()) {
                         JSONObject parentContainer = containerStack.peek();
-                        if(parentContainer.getType() == 'M' || parentContainer.getType() == 'A'){
+                        if (parentContainer.getType() == 'M' || parentContainer.getType() == 'A') {
                             parentContainer.add(currentContainer);
-                        }else{
-                            throw new JSONException("Error: invalid JSONObject type '" + parentContainer.getType() + "'...");
+                        } else {
+                            throw new JSONException(
+                                    "Error: invalid JSONObject type '" + parentContainer.getType() + "'...");
                         }
                     }
                     index++;
-                    if(index < string.length())currentChar = string.charAt(index);
-                }else{
-                    containerStack.push(currentContainer);                    
+                    if (index < string.length())
+                        currentChar = string.charAt(index);
+                } else {
+                    containerStack.push(currentContainer);
                     containerStack.push(new JSONObject());
                 }
 
-            }else if (type == 'A') {
-                if(currentChar == ','){
+            } else if (type == 'A') {
+                if (currentChar == ',') {
                     currentChar = string.charAt(++index);
-                    containerStack.push(currentContainer);                    
+                    containerStack.push(currentContainer);
                     containerStack.push(new JSONObject());
-                }else if(currentChar == ']'){ /// end of array
-                    if(!containerStack.empty()){
+                } else if (currentChar == ']') { /// end of array
+                    if (!containerStack.empty()) {
                         JSONObject parentContainer = containerStack.peek();
-                        if(parentContainer.getType() == 'M' || parentContainer.getType() == 'A'){
+                        if (parentContainer.getType() == 'M' || parentContainer.getType() == 'A') {
                             parentContainer.add(currentContainer);
-                        }else{
-                            throw new JSONException("Error: invalid JSONObject type '" + parentContainer.getType() + "'...");
+                        } else {
+                            throw new JSONException(
+                                    "Error: invalid JSONObject type '" + parentContainer.getType() + "'...");
                         }
                     }
                     index++;
-                    if(index < string.length())currentChar = string.charAt(index);
-                }else{
-                    containerStack.push(currentContainer);                    
+                    if (index < string.length())
+                        currentChar = string.charAt(index);
+                } else {
+                    containerStack.push(currentContainer);
                     containerStack.push(new JSONObject());
                 }
-            }else if(type == 'I' || type == 'D' || type == 'S' || type == 'B' || type == 'N'){
-                if(!containerStack.empty()){
+            } else if (type == 'I' || type == 'D' || type == 'S' || type == 'B' || type == 'N') {
+                if (!containerStack.empty()) {
                     JSONObject parentContainer = containerStack.peek();
-                    if(parentContainer.getType() == 'M' || parentContainer.getType() == 'A'){
+                    if (parentContainer.getType() == 'M' || parentContainer.getType() == 'A') {
                         parentContainer.add(currentContainer);
-                    }else{
-                        throw new JSONException("Error: invalid JSONObject type '" + parentContainer.getType() + "'...");
+                    } else {
+                        throw new JSONException(
+                                "Error: invalid JSONObject type '" + parentContainer.getType() + "'...");
                     }
                 }
             }
         }
-        if(index != string.length()){
+        if (index != string.length()) {
             throw new JSONException(index, string);
         }
         return currentContainer;
@@ -321,12 +331,12 @@ public class JSONObject {
 
         if (type == 'U')
             type = 'A';
-        if(values == null)
+        if (values == null)
             values = new ArrayList<JSONObject>();
-        if(type == 'A')
+        if (type == 'A')
             values.add(value);
-        if(type == 'M')
-            values.set(values.size()-1, value);
+        if (type == 'M')
+            values.set(values.size() - 1, value);
     }
 
     public void add(int i) {
@@ -359,9 +369,9 @@ public class JSONObject {
 
         if (type == 'U')
             type = 'M';
-        if(keys == null)
+        if (keys == null)
             keys = new ArrayList<String>();
-        if(values == null)
+        if (values == null)
             values = new ArrayList<JSONObject>();
         keys.add(key);
         values.add(value);
@@ -386,5 +396,9 @@ public class JSONObject {
         String str = new String("[{\"a\":[1, 2], \"abc\":12}, \"test\"]");
         JSONObject obj = JSONObject.parseString(str);
         System.out.println(obj);
+        System.out.println(obj.get(0).get("a").get(0));
+        System.out.println(obj.get(0).get("a").get(1));
+        System.out.println(obj.get(0).get("abc"));
+        System.out.println(obj.get(1));
     }
 }

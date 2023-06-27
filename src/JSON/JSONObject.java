@@ -1,6 +1,5 @@
 package JSON;
 
-import java.security.CryptoPrimitive;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,28 +41,66 @@ public class JSONObject {
     }
 
     public void setValue(int i) {
+        if (type != 'D' && type != 'U')
+            throw new JSONException("Error: cannot assign value of type 'I' to JSONObject of type '" + type + "'");
         value = Integer.valueOf(i);
         type = 'I';
     }
 
-    public void setNull() {
-        value = null;
-        type = 'N';
-    }
-
     public void setValue(double d) {
+        if (type != 'D' && type != 'U')
+            throw new JSONException("Error: cannot assign value of type 'D' to JSONObject of type '" + type + "'");
         value = Double.valueOf(d);
         type = 'D';
     }
 
     public void setValue(String s) {
+        if (type != 'D' && type != 'U')
+            throw new JSONException("Error: cannot assign value of type 'S' to JSONObject of type '" + type + "'");
         value = new String(s);
         type = 'S';
     }
 
     public void setValue(boolean b) {
+        if (type != 'D' && type != 'U')
+            throw new JSONException("Error: cannot assign value of type 'B' to JSONObject of type '" + type + "'");
         value = Boolean.valueOf(b);
         type = 'B';
+    }
+
+    public void setNull() {
+        if (type != 'D' && type != 'U')
+            throw new JSONException("Error: cannot assign value of type 'N' to JSONObject of type '" + type + "'");
+        value = null;
+        type = 'N';
+    }
+
+    public Object getValue() {
+        return value;
+    }
+
+    public int getInt() {
+        if (type != 'I')
+            throw new JSONException("Error: invalid type '" + type + "', expected 'I'");
+        return ((Integer) value).intValue();
+    }
+
+    public double getDouble() {
+        if (type != 'D')
+            throw new JSONException("Error: invalid type '" + type + "', expected 'D'");
+        return ((Double) value).doubleValue();
+    }
+
+    public String getString() {
+        if (type != 'S')
+            throw new JSONException("Error: invalid type '" + type + "', expected 'S'");
+        return (String) value;
+    }
+
+    public boolean getBoolean() {
+        if (type != 'D')
+            throw new JSONException("Error: invalid type '" + type + "', expected 'B'");
+        return ((Boolean) value).booleanValue();
     }
 
     public char getType() {
@@ -73,7 +110,7 @@ public class JSONObject {
     public boolean isEmpty() {
         if (type == 'A' || type == 'M')
             return values.isEmpty();
-        return true;
+        throw new JSONException("Error: method 'isEmpty()' is not to be used with JSONObjects of type '" + type + "'");
     }
 
     public static JSONObject parseString(String string) {
@@ -82,7 +119,6 @@ public class JSONObject {
         containerStack.push(currentContainer);
         char currentChar = ' ';
         char type;
-        boolean expectingComma = false;
         int index = -1;
         while (!containerStack.empty()) {
             currentContainer = containerStack.pop();
@@ -269,11 +305,16 @@ public class JSONObject {
     }
 
     public Iterator<String> keys() {
-        return keys.iterator();
+        if (type == 'M')
+            return keys.iterator();
+        throw new JSONException("Error: key iterator not available for JSONObject of type '" + type + "'");
     }
 
     public Iterator<JSONObject> values() {
-        return values.iterator();
+        if (type == 'A' || type == 'M')
+            return values.iterator();
+        throw new JSONException("Error: key iterator not available for JSONObject of type '" + type + "'");
+
     }
 
     public String toString() {
@@ -335,7 +376,7 @@ public class JSONObject {
             values = new ArrayList<JSONObject>();
         if (type == 'A')
             values.add(value);
-        if (type == 'M')
+        if (type == 'M') /// sets the value of the newest member, only to be used in parseString
             values.set(values.size() - 1, value);
     }
 

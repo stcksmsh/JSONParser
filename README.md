@@ -1,3 +1,4 @@
+![Logo][logo]
 # Java JSON parsing package
 [![Language][language-shield]](https://www.java.com/)   [![Linkedin][linkedin-shield]](https://www.linkedin.com/in/kostavukicevic/)   [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
@@ -23,7 +24,7 @@ This work is licensed under a
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-image]](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-[logo]: ./bin/images/logo.png
+[logo]: ./images/logo.png
 [language-shield]: https://img.shields.io/badge/Language-Java-f89820?style=for-the-badge
 [linkedin-shield]: https://img.shields.io/badge/Linkedin-Kosta_Vukicevic-0072b1?style=for-the-badge
 [cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/

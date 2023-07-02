@@ -25,14 +25,14 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="1.4488506"
-     inkscape:cx="88.000794"
-     inkscape:cy="218.44903"
+     inkscape:cx="285.05355"
+     inkscape:cy="247.43752"
      inkscape:window-width="1862"
      inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2" />
+     inkscape:current-layer="layer1" />
   <defs
      id="defs2">
     <linearGradient
@@ -86,12 +86,42 @@
        xlink:href="#linearGradient8385" />
   </defs>
   <g
+     inkscape:label="Name"
      inkscape:groupmode="layer"
-     id="layer2"
-     inkscape:label="Background">
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:71.4572px;fill:#50585c;fill-opacity:1;stroke:#373737;stroke-width:13.5141;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="81.849297"
+       y="372.07513"
+       id="text3356"
+       transform="scale(0.94321114,1.060208)"><tspan
+         sodipodi:role="line"
+         x="81.849297"
+         y="372.07513"
+         style="fill:#50585c;fill-opacity:1;stroke:#373737;stroke-width:13.5141;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="tspan22730">J S     P E N</tspan></text>
+    <g
+       fill-rule="evenodd"
+       id="g29691"
+       transform="matrix(0.53067938,0,0,0.53067894,174.05519,331.49222)">
+      <path
+         d="m 79.865,119.1 c 35.398,48.255 70.04,-13.469 69.989,-50.587 C 149.7938,24.627 105.313,0.099 79.836,0.099 38.944,0.099 0,33.895 0,80.135 0,131.531 44.64,160 79.836,160 71.8715,158.8532 45.33,153.166 44.973,92.033 44.73313,50.686 58.461,34.167 79.778,41.434 c 0.47743,0.17707 23.514,9.2645 23.514,38.951 0,29.56 -23.427,38.715 -23.427,38.715 z"
+         color="#000000"
+         fill="url(#linearGradient3005)"
+         id="path29687"
+         style="fill:url(#linearGradient3005)" />
+      <path
+         d="M 79.823,41.401 C 56.433,33.3391 27.78,52.617 27.78,91.23 27.78,154.278 74.501,160 80.164,160 121.056,160 160,126.204 160,79.964 160,28.568 115.36,0.099 80.164,0.099 c 9.7481,-1.35 52.541,10.55 52.541,69.037 0,38.141 -31.953,58.905 -52.735,50.033 -0.47743,-0.17707 -23.514,-9.2645 -23.514,-38.951 0,-29.56 23.367,-38.818 23.367,-38.818 z"
+         color="#000000"
+         fill="url(#linearGradient3002)"
+         id="path29689"
+         style="fill:url(#linearGradient3002)" />
+    </g>
     <g
        id="g65677"
-       style="stroke:#373737;stroke-opacity:1">
+       style="stroke:#373737;stroke-opacity:1"
+       transform="matrix(0.80999339,0,0,0.90113571,63.38114,-7.78669)">
       <path
          id="path10545"
          style="fill:none;fill-opacity:1;stroke:#373737;stroke-width:12.608;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -107,39 +137,6 @@
          d="M 379.01537,43.445563 419.43503,82.98138"
          id="path21649"
          sodipodi:nodetypes="cc" />
-    </g>
-  </g>
-  <g
-     inkscape:label="Name"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <text
-       xml:space="preserve"
-       style="font-size:83.3782px;fill:#50585c;fill-opacity:1;stroke:#373737;stroke-width:15.7687;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="41.75304"
-       y="435.64572"
-       id="text3356"><tspan
-         sodipodi:role="line"
-         x="41.75304"
-         y="435.64572"
-         style="fill:#50585c;fill-opacity:1;stroke:#373737;stroke-width:15.7687;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="tspan22730">J S     P E N</tspan></text>
-    <g
-       fill-rule="evenodd"
-       id="g29691"
-       transform="matrix(0.58964375,0,0,0.58964327,163.06876,365.87908)">
-      <path
-         d="m 79.865,119.1 c 35.398,48.255 70.04,-13.469 69.989,-50.587 C 149.7938,24.627 105.313,0.099 79.836,0.099 38.944,0.099 0,33.895 0,80.135 0,131.531 44.64,160 79.836,160 71.8715,158.8532 45.33,153.166 44.973,92.033 44.73313,50.686 58.461,34.167 79.778,41.434 c 0.47743,0.17707 23.514,9.2645 23.514,38.951 0,29.56 -23.427,38.715 -23.427,38.715 z"
-         color="#000000"
-         fill="url(#linearGradient3005)"
-         id="path29687"
-         style="fill:url(#linearGradient3005)" />
-      <path
-         d="M 79.823,41.401 C 56.433,33.3391 27.78,52.617 27.78,91.23 27.78,154.278 74.501,160 80.164,160 121.056,160 160,126.204 160,79.964 160,28.568 115.36,0.099 80.164,0.099 c 9.7481,-1.35 52.541,10.55 52.541,69.037 0,38.141 -31.953,58.905 -52.735,50.033 -0.47743,-0.17707 -23.514,-9.2645 -23.514,-38.951 0,-29.56 23.367,-38.818 23.367,-38.818 z"
-         color="#000000"
-         fill="url(#linearGradient3002)"
-         id="path29689"
-         style="fill:url(#linearGradient3002)" />
     </g>
   </g>
 </svg>

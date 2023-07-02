@@ -516,7 +516,7 @@ public class JSONObject {
                 sb.append((Boolean) value);
                 break;
             case 'N':
-                sb.append("NULL");
+                sb.append("null");
                 break;
             case 'A':
                 sb.append('[');
@@ -569,14 +569,14 @@ public class JSONObject {
                 sb.append((Boolean) value);
                 break;
             case 'N':
-                sb.append("NULL");
+                sb.append("null");
                 break;
             case 'A':
                 sb.append("[\n");
                 for (JSONObject obj : values) {
                     for (int i = 0; i < indentCount + 1; i++)
                         sb.append(indent);
-                    sb.append(obj.toBeautifulString(indentCount + 2));
+                    sb.append(obj.toBeautifulString(indentCount + 1));
                     sb.append(",\n");
                 }
                 if (sb.length() > 2)
@@ -593,7 +593,7 @@ public class JSONObject {
                     sb.append('"');
                     sb.append(names.get(i));
                     sb.append("\": ");
-                    sb.append(values.get(i).toBeautifulString(indentCount + 2));
+                    sb.append(values.get(i).toBeautifulString(indentCount + 1));
                     sb.append(",\n");
                 }
                 if (sb.length() > 2)
@@ -619,7 +619,7 @@ public class JSONObject {
      * @throws JSONException if the JSONObject is not of type 'A', 'M'
      */
     public void add(JSONObject value) {
-        if (type != 'A' && type != 'M' && type != 'U') /// it is not an array or NULL
+        if (type != 'A' && type != 'M' && type != 'U')
             throw new JSONException("Error: JSONObject is not of type array");
 
         if (type == 'U')

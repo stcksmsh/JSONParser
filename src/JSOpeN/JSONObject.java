@@ -547,6 +547,10 @@ public class JSONObject {
         return sb.toString();
     }
 
+    /**
+     * @param indentCount the initial indent count, should be 0
+     * @return an indented and formatted JSON string
+     */
     public String toBeautifulString(int indentCount) {
         StringBuilder sb = new StringBuilder("");
         switch (type) {

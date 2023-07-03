@@ -1,7 +1,6 @@
 SRCDIR = src
-BINDIR = bin
 SRC = $(wildcard $(SRCDIR)/**/*.java)
-BIN = $(patsubst $(SRCDIR)/%.java, $(BINDIR)/%.class, $(SRC))
+BIN = $(patsubst $(SRCDIR)/%.java, %.class, $(SRC))
 PROGRAM = JSOpeN.JSONObject
 NAME = JSOpeN.jar
 MANIFEST = manifest.txt
@@ -10,22 +9,20 @@ ICON = ./bin/ico
 build: $(BIN)
 
 run: build
-	(cd $(BINDIR) && java $(PROGRAM))
+	java $(PROGRAM)
 
 $(BIN) : $(SRC)
-	javac -d $(BINDIR) $^
+	javac -d . $^
 
 jar: build $(MANIFEST) 
-	jar cmf $(MANIFEST) $(NAME) $(BINDIR)/**
+	jar cmf $(MANIFEST) $(NAME) **/*.class module-info.java
 
 $(MANIFEST):
 	@echo "Manifest-Version: 1.0" > $(MANIFEST)
-	@echo "Class-Path: ./bin/" >> $(MANIFEST)
-	@echo "Main-Class: JSOpeNmake .JSONObject" >> $(MANIFEST)
+	@echo "Class-Path: ./" >> $(MANIFEST)
 	@echo "" >> $(MANIFEST)
 
 clean:
-	rm -f $(BINDIR)/**/*.class
-	rm -f $(BINDIR)/**/*.json
+	rm -f **/*.class
 	rm -f $(NAME)
 	rm -f manifext.txt

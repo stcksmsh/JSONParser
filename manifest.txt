@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Class-Path: ./bin/
-Main-Class: JSON.JSONObject
+Main-Class: JSOpeN.JSONObject
 

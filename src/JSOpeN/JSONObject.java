@@ -1,5 +1,6 @@
 package JSOpeN;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Stack;
  * @author Kosta Vukicevic
  * @version v0.1-alpha
  */
-public class JSONObject {
+public class JSONObject implements Serializable {
 
     /**
      * List of names in the JSONObject, if it is an array or a value, it will be

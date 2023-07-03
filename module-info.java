@@ -1,0 +1,3 @@
+module JSOpeN {
+    exports JSOpeN;
+}

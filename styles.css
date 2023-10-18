@@ -17,6 +17,11 @@ html{
     min-height: 100%;
 }
 
+a{
+    color: white;
+    text-decoration-color: white;
+}
+
 body{
     /*overflow: hidden;*/
     background: linear-gradient(135deg, var(--color1), var(--color2), var(--color3), var(--color4));
@@ -66,6 +71,12 @@ p{
     display: flex;
     box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.7);
 }
+
+.section{
+    min-height: 50vh;
+    justify-content: center;
+}
+
 .logo{
     flex-direction: column;
     width: fit-content;
@@ -179,10 +190,6 @@ p{
     text-align: center;
     /* animation: logoA infinite ease 5s; */
 }
-/* ovo isprobaj ako ti se svidja */
-/* .right:hover,.left .accordion:hover,.left .visit:hover, .logo:hover{
-    animation: none;
-} */
 .right h1, .left h1{
     font-size: 18px;
 }
